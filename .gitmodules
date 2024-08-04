@@ -1,0 +1,6 @@
+[submodule "test_task_bot"]
+	path = test_task_bot
+	url = https://github.com/vggog/test_task_bot.git
+[submodule "test_task_fastapi"]
+	path = test_task_fastapi
+	url = https://github.com/vggog/test_task_fastapi.git

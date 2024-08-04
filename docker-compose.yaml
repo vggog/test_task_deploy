@@ -1,0 +1,40 @@
+services:
+  mongo:
+    image: mongo:6-jammy
+    ports:
+      - '27017:27017'
+    volumes:
+      - test_task_mongodb:/data/db
+    container_name: mongodb_test_task
+    networks:
+      - test_task-network
+
+  server:
+    build: test_task_fastapi/
+    env_file:
+      - test_task_fastapi/.env
+    ports:
+      - "80:80"
+    volumes:
+      - ./:/code/
+    networks:
+      - test_task-network
+    container_name: test_task_fastapi
+    restart: always
+
+  bot:
+    build: test_task_bot/
+    env_file:
+      - test_task_bot/.env
+    volumes:
+      - ./:/code/
+    networks:
+      - test_task-network
+    container_name: test_task_bot
+    restart: always
+
+volumes:
+  test_task_mongodb:
+
+networks:
+  test_task-network:
